@@ -6,7 +6,8 @@ class OrderForm extends Component {
     this.props = props;
     this.state = {
       name: '',
-      ingredients: []
+      ingredients: [],
+      // validInputs: null
     };
   }
 
@@ -25,7 +26,15 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.clearInputs();
+    const newOrder = {
+      id: Date.now(),
+      name: this.state.name,
+      ingredients: this.state.ingredients
+    }
+    if (this.state.name && this.state.ingredients.length) {
+      this.props.addOrder(newOrder)
+      this.clearInputs()
+    }
   }
 
   clearInputs = () => {
@@ -59,6 +68,7 @@ class OrderForm extends Component {
         <button onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>
+        {/* <p className={!this.state.validInputs ? 'display' : 'hide'}>Please fill out all fields.</p> */}
       </form>
     )
   }
