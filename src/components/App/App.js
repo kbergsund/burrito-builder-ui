@@ -23,11 +23,12 @@ class App extends Component {
   }
 
   addOrder = (newOrder) => {
-    this.setState({
-      orders: [...this.state.orders, newOrder]
-    })
     postOrder(newOrder)
-    .then(data => console.log(data))
+    .then(data => {
+      this.setState({
+        orders: [...this.state.orders, data]
+      })
+    }).catch(error => console.log(error))
   }
 
   render() {

@@ -10,5 +10,12 @@ export const postOrder = (newOrder) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(newOrder)
-  }).then(response => response.json())
+  }).then(response => checkForError(response))
+}
+
+const checkForError = (res) => {
+  if (!res.ok) {
+    throw new Error()
+  }
+  return res.json()
 }
