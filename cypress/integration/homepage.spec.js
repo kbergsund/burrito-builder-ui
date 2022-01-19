@@ -36,13 +36,21 @@ describe('Homepage tests', () => {
     .get('[name=beans]').click()
     .get('[name=sofritas]').click()
     .get('p').contains('Order: beans, sofritas')
-    .get('button').contains('Submit Order').click()
   })
 
   it('should add and display new order on successful form submission', () => {
+    cy.intercept('POST', 'http://localhost:3001/api/v1/orders', {
+      statusCode: 201,
+      body: {
+        name: 'Kyra',
+        ingredients: ['beans', 'sofritas']
+      }
+    })  
+
     cy.get('input').type('Kyra')
     .get('[name=beans]').click()
     .get('[name=sofritas]').click()
+
     .get('button').contains('Submit Order').click()
 
     .get('section').get(':nth-child(4)').get('h3').contains('Kyra')
@@ -54,12 +62,9 @@ describe('Homepage tests', () => {
     .get('button').contains('Submit Order').click()
     .get('.order').should('have.length', '3')
 
+    cy.get('input').clear()
     cy.get('[name=beans]').click()
     .get('button').contains('Submit Order').click()
-    .get('.order').should('have.length', '4')
-
-    cy.get('[name=beans]').click()
-    .get('button').contains('Submit Order').click()
-    .get('.order').should('have.length', '4')
+    .get('.order').should('have.length', '3')
   })
 })

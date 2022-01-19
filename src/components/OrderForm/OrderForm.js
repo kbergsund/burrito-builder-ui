@@ -7,7 +7,6 @@ class OrderForm extends Component {
     this.state = {
       name: '',
       ingredients: [],
-      // validInputs: null
     };
   }
 
@@ -68,7 +67,6 @@ class OrderForm extends Component {
         <button onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>
-        {/* <p className={!this.state.validInputs ? 'display' : 'hide'}>Please fill out all fields.</p> */}
       </form>
     )
   }
