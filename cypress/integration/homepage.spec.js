@@ -56,6 +56,10 @@ describe('Homepage tests', () => {
 
     cy.get('[name=beans]').click()
     .get('button').contains('Submit Order').click()
-    .get('.order').should('have.length', '3')
+    .get('.order').should('have.length', '4')
+
+    cy.get('[name=beans]').click()
+    .get('button').contains('Submit Order').click()
+    .get('.order').should('have.length', '4')
   })
 })
