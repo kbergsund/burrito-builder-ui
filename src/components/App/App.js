@@ -28,7 +28,7 @@ class App extends Component {
       this.setState({
         orders: [...this.state.orders, data]
       })
-    }).catch(error => console.log(error))
+    }).catch(error => console.error(error))
   }
 
   render() {
